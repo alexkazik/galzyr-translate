@@ -1,0 +1,56 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT id, stories, uses, original, original_text, translated, translated_text FROM rule WHERE uses > 0",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "stories",
+        "type_info": "Int8Array"
+      },
+      {
+        "ordinal": 2,
+        "name": "uses",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 3,
+        "name": "original",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 4,
+        "name": "original_text",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 5,
+        "name": "translated",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 6,
+        "name": "translated_text",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": []
+    },
+    "nullable": [
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      true
+    ]
+  },
+  "hash": "cb870547c880afd1b841ddd6ade4309ede0a2d76a6a053cb0df370ab9132702a"
+}

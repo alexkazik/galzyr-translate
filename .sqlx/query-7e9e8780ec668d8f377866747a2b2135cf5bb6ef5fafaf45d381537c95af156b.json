@@ -1,0 +1,28 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT filename, with_version FROM file WHERE asset AND ($1 = ANY(audio_format) OR $1 IS NULL) ORDER BY with_version DESC, filename ASC",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "filename",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 1,
+        "name": "with_version",
+        "type_info": "Bool"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text"
+      ]
+    },
+    "nullable": [
+      false,
+      false
+    ]
+  },
+  "hash": "7e9e8780ec668d8f377866747a2b2135cf5bb6ef5fafaf45d381537c95af156b"
+}

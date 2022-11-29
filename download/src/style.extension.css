@@ -1,0 +1,40 @@
+.font-size-large .fan-verb-tag {
+    padding: 3px 12px
+}
+
+.font-size-default .fan-verb-tag {
+    padding: 1px 10px
+}
+
+.font-size-small .fan-verb-tag {
+    padding: 0 9px
+}
+
+.fan-verb-tag {
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: #5d4613;
+    background: linear-gradient(90deg, #5d4613 50%, #6506d7 50%);
+    background-repeat: no-repeat;
+    display: inline-block;
+    line-height: 20px
+}
+
+.fan-version-head {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.fan-version-head .highlight-block:first-of-type {
+    margin-top: 0;
+}
+
+.fan-version-note {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.fan-version-note .highlight-block:first-of-type {
+    margin-top: 0;
+}

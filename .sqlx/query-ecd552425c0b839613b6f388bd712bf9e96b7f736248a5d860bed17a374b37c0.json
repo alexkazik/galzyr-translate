@@ -1,0 +1,14 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "INSERT INTO button (original, translated) VALUES ($1, NULL) ON CONFLICT DO NOTHING",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "ecd552425c0b839613b6f388bd712bf9e96b7f736248a5d860bed17a374b37c0"
+}

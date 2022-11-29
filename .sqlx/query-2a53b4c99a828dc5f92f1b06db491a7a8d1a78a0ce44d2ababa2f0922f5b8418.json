@@ -1,0 +1,12 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "UPDATE file SET audio_format = '{}'",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": []
+    },
+    "nullable": []
+  },
+  "hash": "2a53b4c99a828dc5f92f1b06db491a7a8d1a78a0ce44d2ababa2f0922f5b8418"
+}

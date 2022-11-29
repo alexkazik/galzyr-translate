@@ -1,0 +1,23 @@
+[package]
+name = "translate"
+version = "0.1.0"
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.5.60", features = ["derive"] }
+deepl-simple-api = { git = "https://github.com/alexkazik/deepl-simple-api.git" }
+sqlx = { version = "0.8.6", features = ["runtime-tokio", "postgres"] }
+tokio = { version = "1", features = ["rt", "rt-multi-thread", "macros"] }
+util = { path = "../util" }
+
+[lints.rust]
+unsafe_code = "forbid"
+unused_crate_dependencies = "warn"
+
+[lints.clippy]
+std_instead_of_core = "warn"
+unwrap_used = "warn"
+pedantic = { level = "warn", priority = -1 }
+too_many_lines = "allow"

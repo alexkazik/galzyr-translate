@@ -1,0 +1,34 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "SELECT filename, last_modified, size FROM file WHERE important=$1 ORDER BY filename ASC",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "filename",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 1,
+        "name": "last_modified",
+        "type_info": "Text"
+      },
+      {
+        "ordinal": 2,
+        "name": "size",
+        "type_info": "Int8"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Bool"
+      ]
+    },
+    "nullable": [
+      false,
+      false,
+      false
+    ]
+  },
+  "hash": "73601a8580549d6544ac64af67672da83ed2fe4685ccb0577976d855c5c3396a"
+}

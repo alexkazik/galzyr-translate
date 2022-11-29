@@ -1,0 +1,23 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "UPDATE rule SET uses=uses+1, stories = array(select distinct e from unnest( array_append(stories, $2)) as a(e) order by e) WHERE original = $1 RETURNING translated",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "translated",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      true
+    ]
+  },
+  "hash": "37ce223514d6be7e1174606369ca999a17fc755541c53516d08a41767a493a4d"
+}

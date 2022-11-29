@@ -1,0 +1,105 @@
+--- web-base/js/main.js	2026-03-28 20:38:23
++++ web-base/js/main-patched.js	2026-03-30 18:04:40
+@@ -133,7 +133,7 @@
+ 	for (var i = 1; i < soundNames.length; i++) {
+ 		var audioName = soundNames[i];
+ 		allAudio['sound'][audioName] = new Howl({
+-			src: ['../audio/'+audioName+'.mp3', '../audio/'+audioName+'.ogg'],
++			src: [fan_base_url_prefix+'/audio/'+audioName+'.mp3', fan_base_url_prefix+'/audio/'+audioName+'.ogg'],
+ 			html5: true,
+ 			volume: getSetting('volumeSound')/100,
+ 		});
+@@ -144,7 +144,7 @@
+ 	for (var i = 1; i < musicNames.length; i++) {
+ 		var audioName = musicNames[i];
+ 		allAudio['music'][audioName] = new Howl({
+-			src: ['../audio/'+audioName+'.mp3', '../audio/'+audioName+'.ogg'],
++			src: [fan_base_url_prefix+'/audio/'+audioName+'.mp3', fan_base_url_prefix+'/audio/'+audioName+'.ogg'],
+ 			html5: true,
+ 			volume: getSetting('volumeMusic')/100,
+ 		});
+@@ -672,6 +672,8 @@
+ 
+ function newSpeech(message) {
+ 	var msg = new SpeechSynthesisUtterance();
++	// fan: use translated language instead of english
++	var language = fan_language;
+ 	msg.lang = language;
+ 
+ 	if (['safari-ios', 'safari-mac'].includes(deviceType) && language == 'en-GB') {
+@@ -746,8 +748,28 @@
+ 
+ $(document).ready(function() {
+ 	// ALWAYS disable dev mode for the generated static HTML version
+-	if ($('body').hasClass('static') || getUrlParams('devmode') == 0) devMode = false;
++	if (fan_app && ($('body').hasClass('static') || getUrlParams('devmode') == 0)) devMode = false;
+ 
++    // fan: add some text
++    $('.logo').after('<div class="fan-version-head"><div class="highlight-block"><b>Fan project: automatic '+fan_language_name+' translation of the stories</b></div></div>');
++    if (!fan_app) {
++        $('.notification-install').hide();
++    }
++    $('.begin-holder').prepend('<div class="fan-version-note" id="fan-version-unknown"><div class="highlight-block"><p><strong>Possibly outdated version</strong></p><p>This tool is based on version '+version+', and it\'s unclear what version the <a href="http://stories.daimyria.fi/">original english storybook</a> is.</p></div></div>');
++    $('.begin-holder').prepend('<div class="fan-version-note"><div class="highlight-block">This is done with the ok from Sami Laakso, the author.<br>There are some caveats though:<ul><li>This tool is based on the <a href="http://stories.daimyria.fi/">original english storybook</a><li>Only the stories, options and many effects and buttons are translated - everything else is unchanged<li>The stories and options are translated with deepl API, effects and buttons are translated manually<li>The expansion is mostly translated<li>Text effects are missing (e.g. wobbly text)<li>The installed app (optional) does not work offline<li>I\'ll release the source to the translator once it\'s finished and cleaned up<li><a href="https://boardgamegeek.com/thread/3673499/fan-project-automatic-german-translation" target="_blank">BGG forum about this project</a></ul></div></div>')
++
++    // fan: version check
++    $.ajax({type: 'GET', url: 'https://dev.stories.daimyria.fi/version.php', success: function(liveVersion){
++      $('#fan-version-unknown').hide();
++      if (liveVersion != version){
++        $('#fan-version-unknown').after('<div class="fan-version-note"><div class="highlight-block"><p><strong>Outdated version</strong></p><p>This tool is based on version '+version+', but the <a href="http://stories.daimyria.fi/">original english storybook</a> is already at version '+liveVersion+'.</p><p>This will be updated eventually, just be in the clear that it is currently not up to date.</p></div></div>');
++      }
++    }});
++
++    // fan: remove data collection settings (since they are not used)
++    $('.sendData').parent().parent().next().remove();
++    $('.sendData').parent().parent().remove();
++
+ 	// WARN ABOUT LEAVING THE EDITOR IF THERE ARE UNSAVED CHANGES
+ 	window.onbeforeunload = function() {
+ 		if (preventReload && currentTrack != null) {
+@@ -776,7 +798,7 @@
+ 	// ================================================ //
+ 
+ 	if ($('body').hasClass('encyclopedia-enabled')) {
+-		var jsonURL = '../json/encyclopedia-'+language.toLowerCase()+'.json';
++		var jsonURL = fan_base_url_prefix+'/json/encyclopedia-'+language.toLowerCase()+'.json';
+ 		if (autoOpen || forceNewStories) {
+ 			jsonURL += '?v='+Date.now();
+ 		} else {
+@@ -799,7 +821,7 @@
+ 		encyclopediaLoaded = true;
+ 	}
+ 
+-	var jsonURL = '../json/stories-'+language.toLowerCase()+'.json';
++	var jsonURL = fan_base_url_prefix+'/json/stories-'+language.toLowerCase()+'.json';
+ 	if (autoOpen || forceNewStories) {
+ 		jsonURL += '?v='+Date.now();
+ 	} else {
+@@ -898,7 +920,7 @@
+ 		}
+ 
+ 		// Attempt to load service worker
+-		var swURL = '../service-worker.js';
++		var swURL = fan_base_url_prefix+'/service-worker.js';
+ 		swURL += '?language='+language;
+ 		swURL += '&audio-format='+audioFormat;
+ 		if ($('body').hasClass('encyclopedia-enabled')) swURL += '&encyclopedia=1';
+@@ -910,7 +932,7 @@
+ 			swURL += '&url-parameters=' + encodeURIComponent(currentURL.search);
+ 		}
+ 
+-		navigator.serviceWorker.register(swURL, { scope: '/' }).then((reg) => {
++		navigator.serviceWorker.register(swURL, { scope: fan_base_url_prefix+'/' }).then((reg) => {
+ 			console.log('Service worker registered successfully.', reg);
+ 			registration = reg;
+ 		}).catch(function (e) {
+@@ -1921,7 +1943,8 @@
+ 
+ 	function switchScene(newSceneId, gameEnd = false, forceGameEnd = false, sendData = false, newGame = false, sceneListId = false) {
+ 		// Send play data
+-		if (!window.location.href.includes('dev') && sendData && settings['sendData'] == 'enabled') {
++		// fan: never send
++		if (false) {
+ 			var playedBlocks = $('.scene.active').attr('id');
+ 			$('.subscene:visible, .option:visible, .outcome:visible').not('.not-chosen').each(function(){
+ 				playedBlocks += ','+$(this).attr('class').split(' ')[1];

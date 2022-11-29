@@ -1,0 +1,25 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\nSELECT context FROM text\nWHERE translated IS NULL AND uses>0\n  AND (first_story <= $1 OR ($2 AND first_story >= $3)) AND NOT (stories <@ $4)\n  AND LENGTH(original) < 40000\nORDER BY first_story ASC, id ASC\nLIMIT 1\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "context",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Bool",
+        "Int8",
+        "Int8Array"
+      ]
+    },
+    "nullable": [
+      true
+    ]
+  },
+  "hash": "1fc558d4644252eb24bbb5baa9a8ed1c44f1c1a725c2cbcc9122b1ed36f59822"
+}

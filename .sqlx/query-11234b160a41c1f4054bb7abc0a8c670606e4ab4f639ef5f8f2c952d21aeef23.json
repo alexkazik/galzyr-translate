@@ -1,0 +1,16 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "UPDATE rule SET original_text=COALESCE($2,original_text), translated_text=COALESCE($3,translated_text) WHERE id=$1",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "11234b160a41c1f4054bb7abc0a8c670606e4ab4f639ef5f8f2c952d21aeef23"
+}

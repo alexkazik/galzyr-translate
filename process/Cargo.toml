@@ -1,0 +1,32 @@
+[package]
+name = "process"
+version = "0.1.0"
+edition = "2024"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.5.60", features = ["derive"] }
+crossbeam-channel = "0.5"
+html-escape = "0.2"
+html_parser = { git = "https://github.com/alexkazik/forked-html-parser.git", branch = "my", default-features = false }
+ownable = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+sqlx = { version = "0.8.6", features = ["runtime-tokio", "postgres"] }
+tokio = { version = "1", features = ["rt", "rt-multi-thread", "macros"] }
+util = { path = "../util" }
+
+[features]
+default = ["app"]
+app = []
+
+[lints.rust]
+unsafe_code = "warn"
+unused_crate_dependencies = "warn"
+
+[lints.clippy]
+std_instead_of_core = "warn"
+unwrap_used = "warn"
+pedantic = { level = "warn", priority = -1 }
+too_many_lines = "allow"
+redundant_else = "allow"

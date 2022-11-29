@@ -1,0 +1,22 @@
+[package]
+name = "util"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+clap = { version = "4.5.60", features = ["derive"] }
+html_parser = { git = "https://github.com/alexkazik/forked-html-parser.git", branch = "my", default-features = false }
+serde = { version = "1.0.228", features = ["derive"] }
+serde_json = "1.0"
+toml = "1.0.4"
+
+[lints.rust]
+unsafe_code = "forbid"
+unused_crate_dependencies = "warn"
+
+[lints.clippy]
+std_instead_of_core = "warn"
+unwrap_used = "warn"
+pedantic = { level = "warn", priority = -1 }
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"

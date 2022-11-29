@@ -1,0 +1,34 @@
+--- web-base/service-worker.js	2026-03-28 20:38:23
++++ web-base/service-worker-patched.js	2026-03-30 18:04:40
+@@ -4,10 +4,10 @@
+ var LANGUAGE = 'en-GB';
+ var CACHE_NAME = 'Lands-V'+VERSION;
+ var FILES_TO_CACHE = [
+-	'/',
++	fan_base_url_prefix+'/',
+ 
+ 	// CSS
+-	'/css/style.css?v='+VERSION,
++	fan_base_url_prefix+'/css/style.css?v='+VERSION,
+ ];
+ 
+ self.addEventListener('install', function(event) {
+@@ -21,16 +21,12 @@
+ 	var ENCYCLOPEDIA = swURL.searchParams.get('encyclopedia') ?? 0;
+ 
+ 	// Determine asset url (php script that takes language into account)
+-	var assetURL = '/assets.php';
+-	assetURL += '?language='+LANGUAGE;
+-	assetURL += '&audio-format='+AUDIOFORMAT;
+-	assetURL += '&encyclopedia='+ENCYCLOPEDIA;
+-	assetURL += '&version='+VERSION;
++	var assetURL = AUDIOFORMAT == '.' ? fan_base_url_prefix+'/assets.json' : fan_base_url_prefix+'/assets-'+AUDIOFORMAT+'.json';
+ 
+ 	// Add a possible dev url with parameters to the files to cache, like /?devmode=0
+ 	if (swURL.searchParams.get('url-parameters') !== '') {
+ 		var URLParameters = decodeURIComponent(swURL.searchParams.get('url-parameters'));
+-		FILES_TO_CACHE.push('/' + URLParameters);
++        FILES_TO_CACHE.push(fan_base_url_prefix + '/' + URLParameters);
+ 	}
+ 
+ 	event.waitUntil(

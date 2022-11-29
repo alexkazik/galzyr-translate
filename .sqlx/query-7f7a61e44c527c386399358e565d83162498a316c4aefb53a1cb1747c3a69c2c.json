@@ -1,0 +1,33 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\nSELECT id, original\nFROM text\nWHERE context IS NOT DISTINCT FROM $5\n  AND translated IS NULL AND uses>0\n  AND (first_story <= $1 OR ($2 AND first_story >= $3)) AND NOT (stories <@ $4)\n  AND length(original) < 40000\nORDER BY first_story ASC, id ASC\nLIMIT $6\n            ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "id",
+        "type_info": "Int8"
+      },
+      {
+        "ordinal": 1,
+        "name": "original",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Bool",
+        "Int8",
+        "Int8Array",
+        "Text",
+        "Int8"
+      ]
+    },
+    "nullable": [
+      false,
+      false
+    ]
+  },
+  "hash": "7f7a61e44c527c386399358e565d83162498a316c4aefb53a1cb1747c3a69c2c"
+}

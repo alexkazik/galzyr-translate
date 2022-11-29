@@ -1,0 +1,24 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "\nINSERT INTO text (stories, original, context, uses)\nVALUES (ARRAY[$1]::bigint[], $2, $3, 1)\nON CONFLICT (context, original) DO UPDATE SET\n    uses=text.uses+1,\n    stories=ARRAY(SELECT DISTINCT e FROM unnest(array_append(text.stories, $1)) AS a(e) ORDER BY e)\nRETURNING translated\n        ",
+  "describe": {
+    "columns": [
+      {
+        "ordinal": 0,
+        "name": "translated",
+        "type_info": "Text"
+      }
+    ],
+    "parameters": {
+      "Left": [
+        "Int8",
+        "Text",
+        "Text"
+      ]
+    },
+    "nullable": [
+      true
+    ]
+  },
+  "hash": "32d4769393265ee3872fe702e5975cf85b31e9e618e36811732154eb4fd5e927"
+}

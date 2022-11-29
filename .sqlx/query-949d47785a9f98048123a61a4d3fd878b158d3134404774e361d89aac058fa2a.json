@@ -1,0 +1,16 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "UPDATE file SET last_modified=$1, size=$2 WHERE filename=$3",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": [
+        "Text",
+        "Int8",
+        "Text"
+      ]
+    },
+    "nullable": []
+  },
+  "hash": "949d47785a9f98048123a61a4d3fd878b158d3134404774e361d89aac058fa2a"
+}

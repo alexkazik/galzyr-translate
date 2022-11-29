@@ -1,0 +1,12 @@
+{
+  "db_name": "PostgreSQL",
+  "query": "UPDATE text SET uses=0, stories=ARRAY[]::bigint[]",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Left": []
+    },
+    "nullable": []
+  },
+  "hash": "765fff3bc3243a891e3dbac90a2a351e5782c0b89a8677a5a4c2645e8625a8fb"
+}

@@ -1,0 +1,45 @@
+## database
+
+# database for meta-data or everything
+database = "postgres://galzyr:galzyr@localhost/galzyr"
+
+# database for translations, if not enabled, the same as above will be used
+# database_translation = "postgres://galzyr:galzyr@localhost/galzyr"
+
+## language
+
+# web-language-code, see: https://en.wikipedia.org/wiki/Language_localisation
+language = "de-DE"
+# name of the language (displayed on the webpage)
+language_name = "german"
+# deepl target language, see: https://developers.deepl.com/docs/getting-started/supported-languages
+deepl_target_lang = "DE"
+
+## directory (all files+directories starting with web are gitignored to make this as easy as possible)
+
+# directory where to store the english files
+source_dir = "web-base"
+# directory to store the localized files
+target_dir = "web-de"
+# link from target_dir to source_dir, if disabled the unmodified files will be copied instead of linked
+# linking requires a unix(like) OS
+link_to = "../web-base"
+
+## url
+
+# url under which it's served, must start with an /
+public_url = "/web-de"
+
+## specify content to translate
+
+# set to false to not translate the "Extra" (demo) content
+translate_demo = true
+
+# limit to a certain number of stories, the base game has stories up to 384
+# max_story = 384
+
+# output one specific story, useful for debugging
+# debug_story = 84
+
+# exclude some stories (not yet fully written/broken stories are automatically excluded)
+# exclude_stories = []

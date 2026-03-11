@@ -704,6 +704,10 @@ $(document).ready(function() {
       }
     }});
 
+    // fan: remove data collection settings (since they are not used)
+    $('.sendData').parent().parent().next().remove();
+    $('.sendData').parent().parent().remove();
+
 	// WARN ABOUT LEAVING THE EDITOR IF THERE ARE UNSAVED CHANGES
 	window.onbeforeunload = function() {
 		if (preventReload && currentTrack != null) {
@@ -1877,7 +1881,8 @@ $(document).ready(function() {
 
 	function switchScene(newSceneId, gameEnd = false, forceGameEnd = false, sendData = false, newGame = false, sceneListId = false) {
 		// Send play data
-		if (!window.location.href.includes('dev') && sendData && settings['sendData'] == 'enabled') {
+		// fan: never send
+		if (false) {
 			var playedBlocks = $('.scene.active').attr('id');
 			$('.subscene:visible, .option:visible, .outcome:visible').not('.not-chosen').each(function(){
 				playedBlocks += ','+$(this).attr('class').split(' ')[1];
@@ -1887,7 +1892,7 @@ $(document).ready(function() {
 			data.append('sessionID',	sessionID);
 			data.append('blocks',		playedBlocks);
 			data.append('lang',			language.toLowerCase());
-			navigator.sendBeacon('https://stories.daimyria.fi/send-play-data.php', data);
+			navigator.sendBeacon('send-play-data.php', data);
 		}
 
 		if (newGame) generateSessionID();

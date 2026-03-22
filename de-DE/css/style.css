@@ -3894,6 +3894,65 @@ body.show-settings .settings-show.button-top {
     background-position: 400%;
   }
 }
+.achievement-36 .description span {
+  animation: decrypt 4.2s linear 0s infinite normal;
+  -webkit-animation: decrypt 4.2s linear 0s infinite normal;
+  -moz-animation: decrypt 4.2s linear 0s infinite normal;
+  -ms-animation: decrypt 4.2s linear 0s infinite normal;
+  -o-animation: decrypt 4.2s linear 0s infinite normal;
+  animation-direction: alternate-reverse;
+}
+.achievement-36 .description span.c1 {
+  animation-delay: -0.72s;
+}
+.achievement-36 .description span.c2 {
+  animation-delay: -0.88s;
+}
+.achievement-36 .description span.c3 {
+  animation-delay: -0.96s;
+}
+.achievement-36 .description span.c4 {
+  animation-delay: -0.79s;
+}
+.achievement-36 .description span.c5 {
+  animation-delay: -0.81s;
+}
+
+@keyframes decrypt {
+  0% {
+    font-family: "mystery";
+  }
+  32% {
+    font-family: "mystery";
+  }
+  36% {
+    font-family: "helvetica", sans-serif;
+  }
+  40% {
+    font-family: "mystery";
+  }
+  44% {
+    font-family: "helvetica", sans-serif;
+  }
+  48% {
+    font-family: "mystery";
+  }
+  52% {
+    font-family: "helvetica", sans-serif;
+  }
+  56% {
+    font-family: "mystery";
+  }
+  60% {
+    font-family: "helvetica", sans-serif;
+  }
+  64% {
+    font-family: "mystery";
+  }
+  68% {
+    font-family: "helvetica", sans-serif;
+  }
+}
 .achievement-40 .description {
   filter: blur(5px);
   animation: blur 4.2s linear 0s infinite normal;

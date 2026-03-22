@@ -1,4 +1,5 @@
 fan_base_url_prefix = "/galzyr-translate/de-DE";
+fan_language = "de-DE"
 var version = $('html').attr('version');
 
 var devMode = true;
@@ -570,6 +571,61 @@ function updateVolumeIcon($icon, volume) {
 // MARK: Text to speech synthesiser
 // ================================================ //
 
+mysterySpeechDictionary = {
+	'a': 'foo', 'A': 'Foo',
+	'b': 'c', 'B': 'C',
+	'c': 'wu', 'C': 'Wu',
+	'd': 'f', 'D': 'F',
+	'e': 'fa', 'E': 'Fa',
+	'f': 'z', 'F': 'Z',
+	'g': 'q', 'G': 'Q',
+	'h': 'pu', 'H': 'Pu',
+	'i': 'cy', 'I': 'Cy',
+	'j': 'l', 'J': 'L',
+	'k': 'j', 'K': 'J',
+	'l': 'hu', 'L': 'Hu',
+	'm': 'ra', 'M': 'Ra',
+	'n': 'b', 'N': 'B',
+	'o': 'ne', 'O': 'Ne',
+	'p': 'd', 'P': 'D',
+	'q': 'v', 'Q': 'V',
+	'r': 'ky', 'R': 'Ky',
+	's': 'gy', 'S': 'Gy',
+	't': 's', 'T': 'S',
+	'u': 'si', 'U': 'Si',
+	'v': 'x', 'V': 'X',
+	'w': 'no', 'W': 'No',
+	'x': 'm', 'X': 'M',
+	'y': 'u', 'Y': 'u',
+	'z': 'tu', 'Z': 'Tu',
+	'å': 'tee', 'Å': 'Tee',
+	'ä': 'nu', 'Ä': 'Nu',
+	'ö': 'pii', 'Ö': 'Pii',
+}
+
+function jumbleMysteryText($block) {
+	if($block.find('.mystery').length !== 0) {
+		$block.find('.mystery').each(function(){
+			var text = scrambleText($(this).text(), 1);
+			$(this).html(text);
+			console.log('scrambled: ' + text);
+		});
+	}
+	return $block;
+}
+
+function scrambleText(text, shift) {
+	var scrambledText = '';
+	for(var i = 0; i < text.length; i++){
+		if (text[i] in mysterySpeechDictionary) {
+			scrambledText += mysterySpeechDictionary[text[i]];
+		} else {
+			scrambledText += text[i];
+		}
+	}
+	return scrambledText;
+}
+
 function textToSpeech($block = false, cancelPrevious = true) {
 	// console.log('speech called');
 	if (getSetting('textToSpeech') != 'enabled') return;	// Return if speech is disabled
@@ -581,11 +637,14 @@ function textToSpeech($block = false, cancelPrevious = true) {
 
 		if (!$block.length) return;
 
+		// If the block has mystery text in it, jumble its letters so the speech synth doesn't spoil the proper meaning
+		$block = jumbleMysteryText($block.clone());
+
 		// Split text into smaller chunks so Chrome doesn't bug out
 		$block.children('p').each(function(){
 			// OLD: split only at paragaphs
 			// speechBlocks.push($(this).html());
-			
+
 			// NEW: split at paragraphs AND sentences
 			var flavour = $(this).text();
 			if (flavour.match(/[\.\?\!]/)) {
@@ -615,6 +674,8 @@ function textToSpeech($block = false, cancelPrevious = true) {
 
 function newSpeech(message) {
 	var msg = new SpeechSynthesisUtterance();
+	// fan: use translated language instead of english
+	var language = fan_language;
 	msg.lang = language;
 
 	if (['safari-ios', 'safari-mac'].includes(deviceType) && language == 'en-GB') {

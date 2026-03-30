@@ -27,8 +27,8 @@
       "purpose": "maskable"
     }
   ],
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "/galzyr-translate/de-DE/",
+  "scope": "/galzyr-translate/de-DE/",
   "background_color": "#fffadc",
   "display": "standalone",
   "theme_color": "#000000"

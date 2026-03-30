@@ -1,5 +1,6 @@
 fan_base_url_prefix = "/galzyr-translate/de-DE";
 fan_language = "de-DE"
+fan_app = true
 var version = $('html').attr('version');
 
 var devMode = true;
@@ -750,12 +751,15 @@ var encyclopediaLoaded = false;
 
 $(document).ready(function() {
 	// ALWAYS disable dev mode for the generated static HTML version
+	if (fan_app && ($('body').hasClass('static') || getUrlParams('devmode') == 0)) devMode = false;
 
     // fan: add some text
     $('.logo').after('<div class="fan-version-head"><div class="highlight-block"><b>Fan project: automatic german translation of the stories</b></div></div>');
-    $('.notification-install').hide();
+    if (!fan_app) {
+        $('.notification-install').hide();
+    }
     $('.begin-holder').prepend('<div class="fan-version-note" id="fan-version-unknown"><div class="highlight-block"><p><strong>Possibly outdated version</strong></p><p>This tool is based on version '+version+', and it\'s unclear what version the <a href="http://stories.daimyria.fi/">original english storybook</a> is.</p></div></div>');
-    $('.begin-holder').prepend('<div class="fan-version-note"><div class="highlight-block">This is done with the ok from Sami Laakso, the author.<br>There are some caveats though:<ul><li>This tool is based on the <a href="http://stories.daimyria.fi/">original english storybook</a><li>Only the stories, options and many effects and buttons are translated - everything else is unchanged<li>The stories and options are translated with deepl API, effects and buttons are translated manually<li>The expansion mostly translated<li>Text effects are missing (e.g. wobbly text)<li>It can\'t be installed as a app<li>Always runs in devMode (which should not disturb you in any way)<li>I\'ll release the source to the translator once it\'s finished and cleaned up<li><a href="https://boardgamegeek.com/thread/3673499/fan-project-automatic-german-translation" target="_blank">BGG forum about this project</a></ul></div></div>')
+    $('.begin-holder').prepend('<div class="fan-version-note"><div class="highlight-block">This is done with the ok from Sami Laakso, the author.<br>There are some caveats though:<ul><li>This tool is based on the <a href="http://stories.daimyria.fi/">original english storybook</a><li>Only the stories, options and many effects and buttons are translated - everything else is unchanged<li>The stories and options are translated with deepl API, effects and buttons are translated manually<li>The expansion is mostly translated<li>Text effects are missing (e.g. wobbly text)<li>The installed app (optional) does not work offline<li>I\'ll release the source to the translator once it\'s finished and cleaned up<li><a href="https://boardgamegeek.com/thread/3673499/fan-project-automatic-german-translation" target="_blank">BGG forum about this project</a></ul></div></div>')
 
     // fan: version check
     $.ajax({type: 'GET', url: 'https://dev.stories.daimyria.fi/version.php', success: function(liveVersion){
@@ -931,7 +935,7 @@ $(document).ready(function() {
 			swURL += '&url-parameters=' + encodeURIComponent(currentURL.search);
 		}
 
-		navigator.serviceWorker.register(swURL, { scope: '/' }).then((reg) => {
+		navigator.serviceWorker.register(swURL, { scope: fan_base_url_prefix+'/' }).then((reg) => {
 			console.log('Service worker registered successfully.', reg);
 			registration = reg;
 		}).catch(function (e) {

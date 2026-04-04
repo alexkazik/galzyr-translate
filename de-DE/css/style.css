@@ -1809,54 +1809,7 @@ body:not(.effects-disabled) .old-timey {
   padding: 0.05em 0.3em;
 }
 
-.personal-card-stack {
-  text-align: center;
-  position: relative;
-  display: inline-block;
-  top: 1.5px;
-}
-.personal-card-stack .card-stacked {
-  position: absolute;
-  left: 0;
-  top: 0;
-  animation: pulseStack 7s linear 0s infinite normal;
-  -webkit-animation: pulseStack 7s linear 0s infinite normal;
-  -moz-animation: pulseStack 7s linear 0s infinite normal;
-  -ms-animation: pulseStack 7s linear 0s infinite normal;
-  -o-animation: pulseStack 7s linear 0s infinite normal;
-}
-.personal-card-stack .icon {
-  opacity: 0;
-  display: block;
-}
-.personal-card-stack .card-0 {
-  animation: pulseNeutral 7s linear 0s infinite normal;
-  -webkit-animation: pulseNeutral 7s linear 0s infinite normal;
-  -moz-animation: pulseNeutral 7s linear 0s infinite normal;
-  -ms-animation: pulseNeutral 7s linear 0s infinite normal;
-  -o-animation: pulseNeutral 7s linear 0s infinite normal;
-  animation-delay: 0s;
-}
-.personal-card-stack .card-1 {
-  animation-delay: 3s;
-}
-.personal-card-stack .card-2 {
-  animation-delay: 4s;
-}
-.personal-card-stack .card-3 {
-  animation-delay: 5s;
-}
-.personal-card-stack .card-4 {
-  animation-delay: 6s;
-}
-.personal-card-stack .card-5 {
-  animation-delay: 7s;
-}
-.personal-card-stack .card-6 {
-  animation-delay: 8s;
-}
-
-@keyframes pulseNeutral {
+@keyframes pulseNeutral-4 {
   0% {
     opacity: 0;
     transform: scale(0.4);
@@ -1878,7 +1831,7 @@ body:not(.effects-disabled) .old-timey {
     transform: scale(0.4);
   }
 }
-@keyframes pulseStack {
+@keyframes pulseStack-4 {
   0% {
     opacity: 0;
     transform: scale(0.4);
@@ -1900,6 +1853,255 @@ body:not(.effects-disabled) .old-timey {
     transform: scale(0.4);
   }
 }
+@keyframes pulseNeutral-5 {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  2% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  37.5% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  39.5% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+@keyframes pulseStack-5 {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  2% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  12.5% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  14.5% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+@keyframes pulseNeutral-6 {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  2% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  33.3333333333% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  35.3333333333% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+@keyframes pulseStack-6 {
+  0% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  2% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  11.1111111111% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  13.1111111111% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+}
+.personal-card-stack {
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  top: 1.5px;
+}
+.personal-card-stack .icon {
+  opacity: 0;
+  display: block;
+}
+.personal-card-stack .card-stacked {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: none;
+}
+
+body:not(.e1-selected):not(.e2-selected) .personal-card-stack .card-stacked {
+  animation: pulseStack-4 7s linear 0s infinite normal;
+  -webkit-animation: pulseStack-4 7s linear 0s infinite normal;
+  -moz-animation: pulseStack-4 7s linear 0s infinite normal;
+  -ms-animation: pulseStack-4 7s linear 0s infinite normal;
+  -o-animation: pulseStack-4 7s linear 0s infinite normal;
+}
+body:not(.e1-selected):not(.e2-selected) .personal-card-stack .card-0 {
+  animation: pulseNeutral-4 7s linear 0s infinite normal;
+  -webkit-animation: pulseNeutral-4 7s linear 0s infinite normal;
+  -moz-animation: pulseNeutral-4 7s linear 0s infinite normal;
+  -ms-animation: pulseNeutral-4 7s linear 0s infinite normal;
+  -o-animation: pulseNeutral-4 7s linear 0s infinite normal;
+  animation-delay: 0s;
+}
+body:not(.e1-selected):not(.e2-selected) .personal-card-stack .card-1 {
+  display: block;
+  animation-delay: 3s;
+}
+body:not(.e1-selected):not(.e2-selected) .personal-card-stack .card-2 {
+  display: block;
+  animation-delay: 4s;
+}
+body:not(.e1-selected):not(.e2-selected) .personal-card-stack .card-3 {
+  display: block;
+  animation-delay: 5s;
+}
+body:not(.e1-selected):not(.e2-selected) .personal-card-stack .card-4 {
+  display: block;
+  animation-delay: 6s;
+}
+
+body.e1-selected:not(.e2-selected) .personal-card-stack .card-stacked {
+  animation: pulseStack-5 8s linear 0s infinite normal;
+  -webkit-animation: pulseStack-5 8s linear 0s infinite normal;
+  -moz-animation: pulseStack-5 8s linear 0s infinite normal;
+  -ms-animation: pulseStack-5 8s linear 0s infinite normal;
+  -o-animation: pulseStack-5 8s linear 0s infinite normal;
+}
+body.e1-selected:not(.e2-selected) .personal-card-stack .card-0 {
+  animation: pulseNeutral-5 8s linear 0s infinite normal;
+  -webkit-animation: pulseNeutral-5 8s linear 0s infinite normal;
+  -moz-animation: pulseNeutral-5 8s linear 0s infinite normal;
+  -ms-animation: pulseNeutral-5 8s linear 0s infinite normal;
+  -o-animation: pulseNeutral-5 8s linear 0s infinite normal;
+  animation-delay: 0s;
+}
+body.e1-selected:not(.e2-selected) .personal-card-stack .card-1 {
+  display: block;
+  animation-delay: 3s;
+}
+body.e1-selected:not(.e2-selected) .personal-card-stack .card-2 {
+  display: block;
+  animation-delay: 4s;
+}
+body.e1-selected:not(.e2-selected) .personal-card-stack .card-3 {
+  display: block;
+  animation-delay: 5s;
+}
+body.e1-selected:not(.e2-selected) .personal-card-stack .card-4 {
+  display: block;
+  animation-delay: 6s;
+}
+body.e1-selected:not(.e2-selected) .personal-card-stack .card-5 {
+  display: block;
+  animation-delay: 7s;
+}
+
+body.e2-selected:not(.e1-selected) .personal-card-stack .card-stacked {
+  animation: pulseStack-5 8s linear 0s infinite normal;
+  -webkit-animation: pulseStack-5 8s linear 0s infinite normal;
+  -moz-animation: pulseStack-5 8s linear 0s infinite normal;
+  -ms-animation: pulseStack-5 8s linear 0s infinite normal;
+  -o-animation: pulseStack-5 8s linear 0s infinite normal;
+}
+body.e2-selected:not(.e1-selected) .personal-card-stack .card-0 {
+  animation: pulseNeutral-5 8s linear 0s infinite normal;
+  -webkit-animation: pulseNeutral-5 8s linear 0s infinite normal;
+  -moz-animation: pulseNeutral-5 8s linear 0s infinite normal;
+  -ms-animation: pulseNeutral-5 8s linear 0s infinite normal;
+  -o-animation: pulseNeutral-5 8s linear 0s infinite normal;
+  animation-delay: 0s;
+}
+body.e2-selected:not(.e1-selected) .personal-card-stack .card-1 {
+  display: block;
+  animation-delay: 3s;
+}
+body.e2-selected:not(.e1-selected) .personal-card-stack .card-2 {
+  display: block;
+  animation-delay: 4s;
+}
+body.e2-selected:not(.e1-selected) .personal-card-stack .card-3 {
+  display: block;
+  animation-delay: 5s;
+}
+body.e2-selected:not(.e1-selected) .personal-card-stack .card-4 {
+  display: block;
+  animation-delay: 6s;
+}
+body.e2-selected:not(.e1-selected) .personal-card-stack .card-6 {
+  display: block;
+  animation-delay: 7s;
+}
+
+body.e1-selected.e2-selected .personal-card-stack .card-stacked {
+  animation: pulseStack-6 9s linear 0s infinite normal;
+  -webkit-animation: pulseStack-6 9s linear 0s infinite normal;
+  -moz-animation: pulseStack-6 9s linear 0s infinite normal;
+  -ms-animation: pulseStack-6 9s linear 0s infinite normal;
+  -o-animation: pulseStack-6 9s linear 0s infinite normal;
+}
+body.e1-selected.e2-selected .personal-card-stack .card-0 {
+  animation: pulseNeutral-6 9s linear 0s infinite normal;
+  -webkit-animation: pulseNeutral-6 9s linear 0s infinite normal;
+  -moz-animation: pulseNeutral-6 9s linear 0s infinite normal;
+  -ms-animation: pulseNeutral-6 9s linear 0s infinite normal;
+  -o-animation: pulseNeutral-6 9s linear 0s infinite normal;
+  animation-delay: 0s;
+}
+body.e1-selected.e2-selected .personal-card-stack .card-1 {
+  display: block;
+  animation-delay: 3s;
+}
+body.e1-selected.e2-selected .personal-card-stack .card-2 {
+  display: block;
+  animation-delay: 4s;
+}
+body.e1-selected.e2-selected .personal-card-stack .card-3 {
+  display: block;
+  animation-delay: 5s;
+}
+body.e1-selected.e2-selected .personal-card-stack .card-4 {
+  display: block;
+  animation-delay: 6s;
+}
+body.e1-selected.e2-selected .personal-card-stack .card-5 {
+  display: block;
+  animation-delay: 7s;
+}
+body.e1-selected.e2-selected .personal-card-stack .card-6 {
+  display: block;
+  animation-delay: 8s;
+}
+
 .rules .icon-GGR, .rules .icon-SRV, .rules .icon-KNW, .rules .icon-CMM, .rules .icon-PRC, .rules .icon-THV, .rules .icon-FRR, .rules .icon-SCR, .rules .icon-GNP, .rules .icon-SCC {
   border-radius: 20px;
   font-size: 22px;
@@ -2087,7 +2289,7 @@ body:not(.effects-disabled) .old-timey {
   height: 100%;
 }
 .rules-all .col.icon, .rules-all .col.step {
-  width: 30px;
+  width: 34px;
   text-align: center;
   vertical-align: middle;
   font-size: 30px;
@@ -3955,11 +4157,12 @@ body.show-settings .settings-show.button-top {
 }
 .achievement-40 .description {
   filter: blur(5px);
-  animation: blur 4.2s linear 0s infinite normal;
-  -webkit-animation: blur 4.2s linear 0s infinite normal;
-  -moz-animation: blur 4.2s linear 0s infinite normal;
-  -ms-animation: blur 4.2s linear 0s infinite normal;
-  -o-animation: blur 4.2s linear 0s infinite normal;
+  animation: blur 4.8s linear 0s infinite normal;
+  -webkit-animation: blur 4.8s linear 0s infinite normal;
+  -moz-animation: blur 4.8s linear 0s infinite normal;
+  -ms-animation: blur 4.8s linear 0s infinite normal;
+  -o-animation: blur 4.8s linear 0s infinite normal;
+  animation-delay: -2s;
 }
 
 @keyframes blur {
@@ -4447,6 +4650,14 @@ body.e1-selected .expansion-1-not-owned {
 
 body:not(.e1-selected) .expansion-1-owned {
   display: none !important;
+}
+
+.expansion-1-bg {
+  background-color: rgb(99, 69, 149) !important;
+}
+
+.expansion-2-bg {
+  background-color: rgb(207, 45, 47) !important;
 }
 
 .special-notice {

@@ -1,0 +1,35 @@
+{
+  "short_name": "Galzyr",
+  "name": "Lands of Galzyr",
+  "icons": [
+    {
+      "src": "/galzyr-translate/it-IT/img/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/galzyr-translate/it-IT/img/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/galzyr-translate/it-IT/img/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any"
+    },
+    {
+      "src": "/galzyr-translate/it-IT/img/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "/galzyr-translate/it-IT/",
+  "scope": "/galzyr-translate/it-IT/",
+  "background_color": "#fffadc",
+  "display": "standalone",
+  "theme_color": "#000000"
+}

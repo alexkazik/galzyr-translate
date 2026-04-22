@@ -4286,15 +4286,17 @@ body.show-settings .settings-show.button-top {
 }
 .highlight-block.unfinished-expansion-1-message, .highlight-block.unfinished-expansion-2-message {
   display: none;
+}
+.highlight-block.align-content-left {
   margin-bottom: 15px;
 }
-.highlight-block.unfinished-expansion-1-message p, .highlight-block.unfinished-expansion-2-message p {
+.highlight-block.align-content-left p {
   text-align: left;
 }
-.highlight-block.unfinished-expansion-1-message p:first-of-type, .highlight-block.unfinished-expansion-2-message p:first-of-type {
+.highlight-block.align-content-left p:first-of-type {
   margin-top: 0;
 }
-.highlight-block.unfinished-expansion-1-message p:last-of-type, .highlight-block.unfinished-expansion-2-message p:last-of-type {
+.highlight-block.align-content-left p:last-of-type {
   margin-bottom: 0;
 }
 

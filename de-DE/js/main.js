@@ -1,6 +1,7 @@
 fan_base_url_prefix = "/galzyr-translate/de-DE";
 fan_language = "de-DE"
 fan_app = true
+fan_language_name = "german"
 var version = $('html').attr('version');
 
 var devMode = true;
@@ -754,7 +755,7 @@ $(document).ready(function() {
 	if (fan_app && ($('body').hasClass('static') || getUrlParams('devmode') == 0)) devMode = false;
 
     // fan: add some text
-    $('.logo').after('<div class="fan-version-head"><div class="highlight-block"><b>Fan project: automatic german translation of the stories</b></div></div>');
+    $('.logo').after('<div class="fan-version-head"><div class="highlight-block"><b>Fan project: automatic '+fan_language_name+' translation of the stories</b></div></div>');
     if (!fan_app) {
         $('.notification-install').hide();
     }

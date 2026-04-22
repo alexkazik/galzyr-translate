@@ -1,7 +1,7 @@
 fan_base_url_prefix = "/galzyr-translate/de-DE";
 console.log('[ServiceWorker] Initialising...');
 
-var VERSION = '2.1.14';
+var VERSION = '2.1.17';
 var LANGUAGE = 'en-GB';
 var CACHE_NAME = 'Lands-V'+VERSION;
 var FILES_TO_CACHE = [

@@ -1,6 +1,7 @@
 use crate::db::db_text;
 use crate::paragraph::ParagraphWriter;
 use core::fmt::Write;
+use html_escape::encode_text;
 use html_parser::for_each::{ForEach, NoBrk, NoErr, WalkResult, element_mut};
 use html_parser::{Element, ElementVariant, Node, VecMap, VecSet};
 use sqlx::Postgres;
@@ -31,7 +32,7 @@ pub(crate) async fn process_flavor(
                 Node::Element(e) if e.name == "span" => {
                     if e.has_class("drop-cap") {
                         for t in node.into_iter().filter_map(|n| n.text()) {
-                            paragraphs.push_str(t.as_str());
+                            paragraphs.push_str(t);
                         }
                         is_cap = true;
                     } else if e.has_class("quote") {
@@ -56,7 +57,7 @@ pub(crate) async fn process_flavor(
                                 .0
                         );
                     } else {
-                        only_text(&mut paragraphs, e, true);
+                        only_text(&mut paragraphs, e);
                     }
                 }
                 Node::Element(e) if e.name == "br" || e.name == "img" => {
@@ -143,18 +144,15 @@ pub(crate) async fn process_flavor(
     paragraphs
 }
 
-fn only_text(txt: &mut ParagraphWriter, parent: &Element, no_space: bool) {
-    if !no_space && parent.has_class("w") {
-        txt.push(' ');
-    }
-
+fn only_text(txt: &mut ParagraphWriter, parent: &Element) {
     let mut no_space = true;
     for child in &parent.children {
         match child {
             Node::Text(t) => {
-                txt.push_str(t);
+                // decode+encode ensures that only <, > and & are encoded, which is requires for deepl.com xml compatibility
+                txt.push_str(&encode_text(&t.decode()));
             }
-            Node::Element(e) => only_text(txt, e, no_space),
+            Node::Element(e) => only_text(txt, e),
             Node::Comment(_) => {}
         }
         if no_space {

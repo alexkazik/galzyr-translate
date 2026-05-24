@@ -1,7 +1,7 @@
 fan_base_url_prefix = "/galzyr-translate/de-DE";
 console.log('[ServiceWorker] Initialising...');
 
-var VERSION = '2.1.17';
+var VERSION = '2.1.21';
 var LANGUAGE = 'en-GB';
 var CACHE_NAME = 'Lands-V'+VERSION;
 var FILES_TO_CACHE = [
@@ -24,10 +24,21 @@ self.addEventListener('install', function(event) {
 	// Determine asset url (php script that takes language into account)
 	var assetURL = AUDIOFORMAT == '.' ? fan_base_url_prefix+'/assets.json' : fan_base_url_prefix+'/assets-'+AUDIOFORMAT+'.json';
 
+	// Add possible language version index.html to cache, like /es
+	if (LANGUAGE != 'en-GB') {
+		FILES_TO_CACHE.push(fan_base_url_prefix + '/' + LANGUAGE.split('-')[0]);
+	}
+
 	// Add a possible dev url with parameters to the files to cache, like /?devmode=0
-	if (swURL.searchParams.get('url-parameters') !== '') {
-		var URLParameters = decodeURIComponent(swURL.searchParams.get('url-parameters'));
-        FILES_TO_CACHE.push(fan_base_url_prefix + '/' + URLParameters);
+	// The end user shouldn't have any parameters set, but this is needed at least for development work
+	var searchParams = swURL.searchParams.get('url-parameters');
+	if (searchParams !== '' && searchParams != null) {
+		var URLParameters = decodeURIComponent(searchParams);
+		FILES_TO_CACHE.push(fan_base_url_prefix + '/' + URLParameters);
+		if (LANGUAGE != 'en-GB') {
+			// The same for other language versions
+			FILES_TO_CACHE.push(fan_base_url_prefix + '/' + LANGUAGE.split('-')[0] + URLParameters);
+		}
 	}
 
 	event.waitUntil(
@@ -36,6 +47,9 @@ self.addEventListener('install', function(event) {
 			.then(jsonData => {
 			// Update the cache with all files got from the PHP script
 			FILES_TO_CACHE = FILES_TO_CACHE.concat(jsonData);
+
+			console.log("FILES_TO_CACHE:");
+			console.log(FILES_TO_CACHE);
 
 			// Cache all files
 			return caches.open(CACHE_NAME).then(function(cache) {

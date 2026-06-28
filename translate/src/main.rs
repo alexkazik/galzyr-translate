@@ -11,6 +11,8 @@ use sqlx::{Connection, PgConnection};
 use tokio::time::sleep;
 use util::{Config, ConfigArgs};
 
+const TOO_MANY_REQUESTS_SLEEP: Duration = Duration::from_secs(10);
+
 #[tokio::main]
 async fn main() {
     let args = ConfigArgs::parse();
@@ -62,10 +64,19 @@ async fn main() {
 
     for i in 0.. {
         if i > 0 && (i % 10) == 0 {
-            usage = deepl
-                .usage()
-                .await
-                .unwrap_or_else(|err| panic!("failed to get usage: {err}"));
+            loop {
+                match deepl.usage().await {
+                    Ok(value) => {
+                        usage = value;
+                        break;
+                    }
+                    Err(Error::TooManyRequests) => {
+                        eprintln!("Too many requests");
+                        sleep(TOO_MANY_REQUESTS_SLEEP).await;
+                    }
+                    Err(err) => panic!("failed to get usage: {err}"),
+                }
+            }
             eprintln!("RE {usage:?}");
         } else {
             eprintln!("LP {usage:?}");
@@ -145,7 +156,7 @@ LIMIT $6
 
             if matches!(resp, Err(Error::TooManyRequests)) {
                 eprintln!("Too many requests");
-                sleep(Duration::from_secs(10)).await;
+                sleep(TOO_MANY_REQUESTS_SLEEP).await;
                 continue;
             }
 

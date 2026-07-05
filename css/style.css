@@ -1,0 +1,57 @@
+body:after {
+    content: "";
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background-image: url("../img/background-page.jpg");
+    pointer-events: none;
+}
+.intro .logo, .curtain-container .logo {
+    width: 600px;
+    max-width: 82%;
+    display: table;
+    margin: 0 auto 3vw;
+}
+body.title-screen .logo {
+    margin-top: calc(50vh - 320px);
+}
+.highlight-block {
+    margin-top: 15px;
+    padding: 15px;
+    background-color: rgb(255, 250, 220);
+    border-radius: 10px;
+    position: relative;
+}
+.intro h2 {
+    display: none;
+}
+body, html {
+    font-family: "helvetica", sans-serif;
+    font-weight: normal;
+    font-size: 18px;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+.fan-version-head {
+    text-align: center;
+    margin-bottom: 25px;
+}
+b {
+    font-weight: bolder;
+}
+.scene {
+    max-width: 100ch;
+    min-height: 100vh;
+    box-sizing: border-box;
+    margin: auto;
+    position: relative;
+    padding: 40px;
+}
